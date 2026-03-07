@@ -7,6 +7,7 @@
 		?>
 
 		<form method="post" action="process.php">
+		<!-- <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get"> -->
 			<label for="name">Name</label>
 			<input type="text" name="name" id="name"/> <br>
 			<label for="email">Email</label>
@@ -20,3 +21,14 @@
 		</form>	
 	</body>
 </html>
+
+<?php
+if (isset($_GET['email'])) {
+	$email = $_GET['email'];
+	$correctEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+	if ($correctEmail) {
+		echo "Email is valid $email";
+	} else {
+		echo "Email is invalid";
+	}
+}

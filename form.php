@@ -69,13 +69,14 @@
 <div class="container">
     <h2>Register</h2>
     <form action="welcome.php" method="POST">
+        <!-- <form action="<?= $_SERVER['PHP_SELF'] ?>" method="get"> -->
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" required>
         </div>
         <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
@@ -87,3 +88,14 @@
 
 </body>
 </html>
+
+<?php
+if (isset($_GET['email'])) {
+	$email = $_GET['email'];
+	$correctEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+	if ($correctEmail) {
+		echo "Email is valid $email";
+	} else {
+		echo "Email is invalid";
+	}
+}
