@@ -11,16 +11,32 @@ require "connection.php";
 $query = $connection->prepare("SELECT * FROM users");
 $query->execute();
 
-$users = $query->fetchAll();
+// $users = $query->fetchAll();
+$customUser = $query->fetchAll(PDO::FETCH_CLASS, "CustomUser"); // fetch only if one row
 
-var_dump($users);
+echo "<pre>";
+// var_dump($users);
+var_dump($customUser);
 
-foreach ($users as $user) {
-    echo "<br>";
-    var_dump($user);
-    echo "<br>";
-    echo($user['full_name']);
+
+
+class CustomUser {
+    public $id;
+    public $full_name;
+    public $user_name;
+    public $password;
+    public $email;
+    public $birth_date;
 }
+
+
+
+// foreach ($users as $user) {
+//     echo "<br>";
+//     var_dump($user);
+//     echo "<br>";
+//     echo($user['full_name']);
+// }
 ?>
 
 
